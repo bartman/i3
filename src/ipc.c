@@ -784,6 +784,9 @@ static void dump_bar_config(yajl_gen gen, Barconfig *config) {
     ystr("strip_workspace_name");
     y(bool, config->strip_workspace_name);
 
+    ystr("sort_workspace_by_name");
+    y(bool, config->sort_workspace_by_name);
+
     ystr("binding_mode_indicator");
     y(bool, !config->hide_binding_mode_indicator);
 

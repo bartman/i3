@@ -99,5 +99,6 @@ CFGFUN(bar_binding_mode_indicator, const char *value);
 CFGFUN(bar_workspace_buttons, const char *value);
 CFGFUN(bar_strip_workspace_numbers, const char *value);
 CFGFUN(bar_strip_workspace_name, const char *value);
+CFGFUN(bar_sort_workspace_by_name, const char *value);
 CFGFUN(bar_start);
 CFGFUN(bar_finish);

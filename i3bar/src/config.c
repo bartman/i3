@@ -304,6 +304,12 @@ static int config_boolean_cb(void *params_, int val) {
         return 1;
     }
 
+    if (!strcmp(cur_key, "sort_workspace_by_name")) {
+        DLOG("sort_workspace_by_name = %d\n", val);
+        config.sort_ws_by_name = val;
+        return 1;
+    }
+
     if (!strcmp(cur_key, "verbose")) {
         if (!config.verbose) {
             DLOG("verbose = %d\n", val);

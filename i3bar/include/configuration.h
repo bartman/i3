@@ -53,6 +53,7 @@ typedef struct config_t {
     bool disable_ws;
     bool strip_ws_numbers;
     bool strip_ws_name;
+    bool sort_ws_by_name;
     char *bar_id;
     char *command;
     char *fontname;

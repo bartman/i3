@@ -153,11 +153,36 @@ static int workspaces_string_cb(void *params_, const unsigned char *val, size_t 
 
         i3_output *target = get_output_by_name(output_name);
         if (target != NULL) {
+            i3_ws *ws_before = NULL;
+
             params->workspaces_walk->output = target;
 
-            TAILQ_INSERT_TAIL(params->workspaces_walk->output->workspaces,
-                              params->workspaces_walk,
-                              tailq);
+            if (config.sort_ws_by_name) {
+                /* find where to add */
+                i3_ws *ws_walk;
+
+                TAILQ_FOREACH(ws_walk, params->workspaces_walk->output->workspaces, tailq) {
+                    int cmp = strcmp(i3string_as_utf8(ws_walk->name),
+                                     i3string_as_utf8(params->workspaces_walk->name));
+                    // -1 ws_walk < new ... insert after
+                    //  1 ws_walk > new ... insert before
+                    if (cmp > 0) {
+                        ws_before = ws_walk;
+                        break;
+                    }
+                }
+            }
+
+            if (ws_before)
+                /* add before */
+                TAILQ_INSERT_BEFORE(ws_before,
+                                    params->workspaces_walk,
+                                    tailq);
+            else
+                /* add to the end */
+                TAILQ_INSERT_TAIL(params->workspaces_walk->output->workspaces,
+                                  params->workspaces_walk,
+                                  tailq);
         }
 
         FREE(output_name);
